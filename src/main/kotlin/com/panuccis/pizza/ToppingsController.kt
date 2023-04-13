@@ -11,7 +11,6 @@ import java.util.*
 @RestController
 class ToppingsController {
     private val toppingsService = ToppingsFileWriter()
-    private val toppings = toppingsService.readToppings().mapValues { it.value }
     @PostMapping("/toppings")
     fun addTopping(@RequestBody request: PostToppingRequest): ResponseEntity<String> {
         if (!isEmailValid(request.email)) {
@@ -22,10 +21,11 @@ class ToppingsController {
     }
 
     @GetMapping("/toppings")
-    fun toppings() = toppings.values.flatten().groupingBy { it }.eachCount()
+    fun toppings() = toppingsService.readToppings().mapValues { it.value }.values.flatten().groupingBy { it }.eachCount()
 
     @GetMapping("/toppings/best")
     fun bestPizzaByIngredientNumber(@RequestParam total: Int): List<String> {
+        val toppings = toppingsService.readToppings().mapValues { it.value }
         val ingredients = toppings.values.flatten().groupingBy { it }.eachCount().entries
         val bestPizza = ingredients.sortedByDescending { it.value }.map { it.key }
 

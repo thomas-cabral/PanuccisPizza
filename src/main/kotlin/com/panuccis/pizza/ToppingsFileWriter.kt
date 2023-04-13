@@ -23,7 +23,7 @@ class ToppingsFileWriter(private val fileName: String = "toppings.txt") {
     }
 
     fun readToppings(): Map<String, Set<String>> {
-        val file = File(fileName)
+        val file = File(fileName).absoluteFile
         return file.readLines().map {
             val (email, toppings) = it.split(":")
             email to toppings.split(",").toSet()
