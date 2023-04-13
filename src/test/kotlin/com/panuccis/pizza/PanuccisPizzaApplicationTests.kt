@@ -64,4 +64,12 @@ class PanuccisPizzaApplicationTests {
         assert(totalToppings["mushrooms"] == 2)
         assert(totalToppings["onions"] == 1)
     }
+
+    @Test
+    fun `should valiate emails`() {
+        val toppingsController = ToppingsController()
+        assert(toppingsController.isEmailValid("thomas@thomascabral.tech"))
+        assert(!toppingsController.isEmailValid("thomascabral.tech"))
+        assert(!toppingsController.isEmailValid("thomas@thomascabral"))
+    }
 }
