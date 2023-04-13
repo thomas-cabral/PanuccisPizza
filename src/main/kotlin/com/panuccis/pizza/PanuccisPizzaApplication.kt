@@ -9,3 +9,4 @@ class PanuccisPizzaApplication
 fun main(args: Array<String>) {
     runApplication<PanuccisPizzaApplication>(*args)
 }
+
