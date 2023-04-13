@@ -66,7 +66,7 @@ class PanuccisPizzaApplicationTests {
     }
 
     @Test
-    fun `should valiate emails`() {
+    fun `should validate emails`() {
         val toppingsController = ToppingsController()
         assert(toppingsController.isEmailValid("thomas@thomascabral.tech"))
         assert(!toppingsController.isEmailValid("thomascabral.tech"))
